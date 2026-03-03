@@ -39,13 +39,15 @@ export const AppContextProvider = ({children}) => {
     else { 
       document.documentElement.classList.remove("dark"); 
     }
+
+    localStorage.setItem("theme",theme); 
   },[theme])
 
   useEffect(()=> { 
     fetchUser(); 
   },[])
   
-  const value = {navigate, user, setUser, chats, setChats, selectedChat, setSelectedChat, theme}
+  const value = {navigate, user, setUser, chats, setChats, selectedChat, setSelectedChat, theme, setTheme}
 
   return (
     <AppContext.Provider value={value}> 

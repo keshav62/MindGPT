@@ -24,7 +24,7 @@ export const textMessageController = async (req,res) => {
     const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
     const {text} = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: "Explain how AI works in a few words",
+    contents: prompt,
   });
   // console.log(text);
 

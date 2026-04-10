@@ -4,7 +4,7 @@ import Transaction from "../models/Transaction.js";
 import User from "../models/User.js";
 
 export const stripeWebhooks = async (request,response)=> { 
-  const stripe = new Stripe(process.env.STRIP_WEBHOOK_SECRET); 
+  const stripe = new Stripe(process.env.STRIP_SECRET_KEY); 
   const sig = request.headers['stripe-signature'] 
 
   let event; 
@@ -27,6 +27,10 @@ export const stripeWebhooks = async (request,response)=> {
 
         if(appId === "mindgpt"){
           const transaction = await Transaction.findOne({_id : transactionId, isPaid:false}); 
+
+          if(!transaction){
+            return response.json({received: true, message: "Transaction not found or already paid"});
+          }
 
           //update credits in user account
           await User.updateOne({_id:transaction.userId}, {$inc : {credits : transaction.credits}})

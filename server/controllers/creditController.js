@@ -1,6 +1,5 @@
-import strip from "strip";
 import Transaction from "../models/Transaction.js";
-import Stripe from 'stripe'
+import Stripe from 'stripe';
 
 const plans = [
   {

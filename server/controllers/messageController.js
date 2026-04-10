@@ -91,7 +91,7 @@ export const imageMessageController = async (req,res)=> {
     const base64Image = `data:image/png;base64,${Buffer.from(aiImageResponse.data,"Buffer").toString('base64')}`
 
 
-    console.log(imageKit);
+    // console.log(imageKit);
     //Upload to ImageKit Media Libarary 
     const uploadResponse = await imageKit.upload({
       file : base64Image, 

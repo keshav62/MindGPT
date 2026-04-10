@@ -14,14 +14,14 @@ export const AppContextProvider = ({children}) => {
   const [chats, setChats] = useState([]); 
   const [selectedChat, setSelectedChat ] = useState(null); 
   const [theme, setTheme] = useState(localStorage.getItem('theme') || ('light')); 
-  const [token, setToken] = useState(localStorage.getItem("token" || null)); 
+  const [token, setToken] = useState(localStorage.getItem("token") || null); 
   const [loadingUser, setLoadingUser] = useState(true); 
 
   const fetchUser = async()=> { 
     try {
       const {data} = await axios.get('/api/user/data', {headers : {Authorization : token}})
       if(data.success){
-        setUser(data); 
+        setUser(data.user); 
       }
       else { 
         toast.error(data.message); 
@@ -47,7 +47,7 @@ export const AppContextProvider = ({children}) => {
 
   const fetchUsersChats = async()=>{ 
     try {
-      const {data} = await axios.get('/api/char/get', {headers : {Authorization : token}}); 
+      const {data} = await axios.get('/api/chat/get', {headers : {Authorization : token}}); 
       if(data.success){
         setChats(data.chats);  
         //If user has no chat create one

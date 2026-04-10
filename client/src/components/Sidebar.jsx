@@ -66,13 +66,32 @@ function Sidebar({isMenuOpen, setIsMenuOpen}) {
         {/* New Chat Button */}
         <button
           onClick={createNewChat}
-          className='flex justify-center items-center gap-1.5 w-full py-2.5 mt-6 text-white text-sm font-medium rounded-xl cursor-pointer
-                     bg-gradient-to-r from-purple-500 to-blue-500
-                     hover:from-purple-600 hover:to-blue-600
-                     shadow-md shadow-purple-300/40 dark:shadow-purple-700/30
-                     transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]'
+          className='group relative flex justify-center items-center gap-2 w-full py-2.5 mt-6
+                     text-white text-sm font-semibold rounded-xl cursor-pointer overflow-hidden
+                     bg-gradient-to-br from-purple-600 to-indigo-600
+                     hover:from-purple-700 hover:to-indigo-700
+                     dark:bg-none dark:bg-purple-500/20 dark:hover:bg-purple-500/30
+                     dark:backdrop-blur-md
+                     dark:border dark:border-purple-400/40 dark:hover:border-purple-400/70
+                     shadow-lg shadow-purple-500/30
+                     transition-all duration-300
+                     hover:-translate-y-0.5 hover:shadow-purple-500/50 hover:shadow-xl
+                     active:translate-y-0 active:scale-[0.98]'
         >
-          <span className='text-lg leading-none'>+</span> New Chat
+          {/* Shimmer sweep on hover */}
+          <span className='absolute inset-0 -translate-x-full group-hover:translate-x-full
+                           transition-transform duration-700 ease-in-out
+                           bg-gradient-to-r from-transparent via-white/10 to-transparent
+                           skew-x-12 pointer-events-none' />
+
+          {/* Icon + label */}
+          <span className='relative z-10 flex items-center gap-2'>
+            <svg className='w-4 h-4 transition-transform duration-300 group-hover:rotate-90'
+                 fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth={2.5}>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M12 4v16m8-8H4'/>
+            </svg>
+            New Chat
+          </span>
         </button>
 
         {/* Search Bar */}
